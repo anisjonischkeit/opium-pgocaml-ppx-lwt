@@ -1,0 +1,31 @@
+{
+  "name": "opium-pgocaml-lwt",
+  "version": "0.1.0",
+  "description": "OCaml workflow with Esy",
+  "license": "MIT",
+  "esy": {
+    "build": "dune build -p #{self.name}",
+    "release": {
+      "releasedBinaries": [
+        "opium-pgocaml-lwt"
+      ]
+    }
+  },
+  "scripts": {
+    "start": "dune exec #{self.name}"
+  },
+  "dependencies": {
+    "@opam/dune": "*",
+    "@opam/graphql-lwt": "0.7.0",
+    "@opam/opium": "0.16.0",
+    "@opam/lwt": "3.3.0",
+    "@opam/pgocaml": "2.3",
+    "@opam/lwt_ppx": "1.2.1",
+    "@opam/ppx_pgsql": "tizoc/ppx_pgsql:ppx_pgsql.opam",
+    "ocaml": "~4.6.0"
+  },
+  "devDependencies": {
+    "@opam/merlin": "^3.0.3",
+    "ocaml": "~4.6.0"
+  }
+}

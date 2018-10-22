@@ -1,0 +1,5 @@
+(executable
+ (name server)
+ (public_name opium-pgocaml-lwt)
+ (preprocess (pps lwt_ppx ppx_pgsql ppxlib.runner))
+ (libraries lwt.unix opium graphql-lwt pgocaml))

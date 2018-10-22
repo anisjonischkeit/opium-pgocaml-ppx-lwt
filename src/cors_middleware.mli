@@ -1,0 +1,1 @@
+val apply_cors_middleware : Opium.Std.App.builder

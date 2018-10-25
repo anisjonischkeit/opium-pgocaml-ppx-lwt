@@ -5,7 +5,7 @@ module PGOCaml = PGOCaml_generic.Make(Pgocaml_thread)
 
 (* ENDPOINTS *)
 
-let print_param execute_query' = get "/insertUser" begin fun req ->
+let print_param execute_query = get "/insertUser" begin fun req ->
   let (>>=) = Lwt.bind in
 
   let insert =
@@ -17,7 +17,7 @@ let print_param execute_query' = get "/insertUser" begin fun req ->
   
   let insert_query = (insert ~name:(param req "name") ~salary:10_000_l ?email:None) in
   
-    execute_query' (insert_query)
+    execute_query (insert_query)
     >>= function
       | Ok _ ->  Lwt.return (`String ("Hello " ^ param req "name") |> respond)
       | Error _ ->  Lwt.return (`String ("Something went wrong") |> respond)
@@ -34,7 +34,7 @@ let () =
     ~database: "testdb" () in
   let (>>=) = Lwt.bind in
 
-  let execute_query' dbh query = 
+  let execute_query dbh query = 
     dbh 
     >>= (fun db -> 
       Lwt.catch 
@@ -45,5 +45,5 @@ let () =
 
   App.empty
   |> apply_cors_middleware
-  |> print_param @@ execute_query' read_only_dbh
+  |> print_param @@ execute_query read_only_dbh
   |> App.run_command
